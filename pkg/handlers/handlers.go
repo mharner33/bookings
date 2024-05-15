@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/mharner33/webapp/pkg/config"
-	"github.com/mharner33/webapp/pkg/models"
-	"github.com/mharner33/webapp/pkg/render"
+	"github.com/mharner33/bookings/pkg/config"
+	"github.com/mharner33/bookings/pkg/models"
+	"github.com/mharner33/bookings/pkg/render"
 )
 
 var Repo *Repository

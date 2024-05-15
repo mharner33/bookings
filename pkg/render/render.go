@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/mharner33/webapp/pkg/config"
-	"github.com/mharner33/webapp/pkg/models"
+	"github.com/mharner33/bookings/pkg/config"
+	"github.com/mharner33/bookings/pkg/models"
 )
 
 var app *config.AppConfig
