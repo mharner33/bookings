@@ -6,6 +6,8 @@
 		<title>Availability</title>
 
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
         <style>
             footer {
                 margin-top: 2em;
@@ -18,6 +20,10 @@
             }
             .room-image {
                 max-width: 50%;
+            
+            .notie-container {
+
+            }
             } 
         </style>
 	</head>
@@ -63,30 +69,26 @@
                 <div class="col-md-6">
                     <h2 class="mt-5"> Search for Availability</h2>
 
-                    <form action="reservation.html" method="get">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="checkin_date" class="form-label">Check-in Date</label>
-                                    <input required type="date" class="form-control" id="checkin_date" name="checkin_date" aria-describedby="checkin_date">
-                                    <div id="checkin_help" class="form-text">Enter your entry date (MM-DD-YYYY).</div>
+                    <form action="reservation.html" method="get" novalidate class="needs-validation">
+                        <!-- <div class="form-row" >
+                          <div class="col"> -->
+                            <div class="form-row" id="res-date">
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" name="start" required placeholder="Arrival Date">
+                                </div>
+                                <div class="col-md-6">
+                                  <input class="form-control" type="text" name="end" required placeholder="Departure Date">  
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="checkout_date" class="form-label">Check-out Date</label>
-                                    <input required type="date" class="form-control" id="checkout_date" name="checkout_date" aria-describedby="checkout_date">
-                                    <div id="checkout_help" class="form-text">Enter your departure date (MM-DD-YYYY).</div>
-                                </div>   
-                            </div> 
-                            
-                        </div>               
+                          <!-- </div>
+                        </div> -->
+                        <hr>              
                         <button type="submit" class="btn btn-primary mt4">Search Availability</button>
                     </form>
-
                 </div>
             </div>
         </div>
+        
         <footer class="footer mt-5 py-3 bg-dark text-white">
             <div class="container">
               <span class="text-muted
@@ -94,5 +96,123 @@
             </div>
         </footer>   
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	</body>
+        <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        // install Notie for notifications.
+        <script src="https://unpkg.com/notie"></script>  
+        <script>
+        
+        let attention = Prompt()
+          (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+              .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                  if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                  }
+
+                  form.classList.add('was-validated')
+                }, false)
+              })
+          })()
+
+          document.getElementById("colorButton").addEventListener("click", function(){
+            let html = `
+            <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+              <div class="form-row">
+                <div class="col">
+                  <input class="form-row" id="res-date-modal">
+                  <div class="col">
+                    <input class="form-control" type="text" name="start" required id="start" placeholder="Arrival">
+                  </div>
+                  <div class="col">
+                    <input class="form-control" type="text" name="end" required id="end" placeholder="Departure">
+                  </div>
+                </div>
+              </div>
+            </form>
+            `
+            attention.toast({msg: html, title: "Choose your dates"});
+          });
+         
+          const elem = document.getElementById('res-date');
+          const rangepicker = new DateRangePicker(elem, {
+            // ...options
+          });       
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        function notify(msg, msgType){
+          notie.alert({
+            type: msgType, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+            text: msg,
+          })
+        }
+
+        <!-- function notifyModal(title, text, icon, confirmation){
+            Swal.fire({
+              title: title,
+              text: text,
+              icon: icon,
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: confirmation
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              }
+            })
+        } -->
+
+        async function custom(c) {
+          const {
+            msg = "",
+            title = "",
+            backdrop: false,
+            focusConfirm: false,
+            showCancelButton: true,
+          }
+          const { value: formValues } = await Swal.fire({
+            title: title,
+            html: msg,
+            focusConfirm: false,
+            preConfirm: () => {
+              return [
+                document.getElementById(start).value,
+                document.getElementById(end).value
+              ];
+            }
+          });
+          if (formValues) {
+            Swal.fire(JSON.stringify(formValues));
+          } 
+        }
+
+
+        function Prompt() {
+          let toast = function() {
+              console.log('toast')
+          }
+          let success = function() {
+              console.log('success')
+          }
+          return {
+              toast: toast
+              success: success
+          }
+        }
+
+      </body>
 </html>
