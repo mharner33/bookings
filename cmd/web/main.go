@@ -12,7 +12,7 @@ import (
 	"github.com/mharner33/bookings/pkg/render"
 )
 
-const portNumber = ":8080"
+const portNumber = ":3000"
 
 var app config.AppConfig
 var session *scs.SessionManager
