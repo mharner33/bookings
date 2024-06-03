@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/mharner33/bookings/pkg/config"
-	"github.com/mharner33/bookings/pkg/handlers"
+	"github.com/mharner33/bookings/internal/config"
+	"github.com/mharner33/bookings/internal/handlers"
 )
 
 // Using Chi router as http lib doesn't support middleware

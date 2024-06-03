@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/mharner33/bookings/pkg/config"
-	"github.com/mharner33/bookings/pkg/models"
-	"github.com/mharner33/bookings/pkg/render"
+	"github.com/mharner33/bookings/internal/config"
+	"github.com/mharner33/bookings/internal/models"
+	"github.com/mharner33/bookings/internal/render"
 )
 
 var Repo *Repository
