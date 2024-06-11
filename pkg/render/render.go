@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	//"http/template"
+	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
-	"text/template"
 
 	"github.com/justinas/nosurf"
 	"github.com/mharner33/bookings/internal/config"
