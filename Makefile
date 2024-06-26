@@ -1,8 +1,8 @@
 build:
-	@go build -o bin/ cmd/web/*.go
+	@go build -o bin/bookings cmd/web/*.go
 
 run: build
-	@go run cmd/web/*.go
+	@./bin/bookings
 
 test:
 	@go test -v ./...
